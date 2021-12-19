@@ -1,0 +1,138 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="myjs2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="style2.css">
+    <style>
+    body
+{
+    font-family:Arial;
+    font-size : 10pt;
+    padding:15px;
+}
+
+.ui-datepicker-calendar {
+    display: none;
+}
+
+    </style>
+
+
+    <title>Test Satya Brat Pandey</title>
+</head>
+<body>
+<div class="container-fluid">
+    <section class="sliderSection border border-secondary clearfix" style="height: 500px;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="test"></div>
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                <div class="item"> <img src="http://placehold.it/140x100" height="500"></div>
+            </div>
+            <br/>
+            <button id="addCarous" class="btn btn-primary"> Add Carousel</button>
+            <button id="removeItem" class="btn btn-danger"> Remove Carousel</button>
+            <br/>
+
+        </div>
+        </div>
+    </section>
+    <br/>
+
+
+    <section class="pageSection mt-5">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="mycont">
+
+                    <div id="page1" style="width: 100%; height:29.7cm; border: 1px solid; margin: 10px 0">
+                        <h1>page1</h1>
+                    </div>
+                
+                    <div id="page2" style="width: 100%; height:29.7cm; border: 1px solid; margin: 10px 0">
+                        <h1>page2</h1>
+                    </div>
+                
+                    <div id="page3" style="width: 100%; height:29.7cm; border: 1px solid; margin: 10px 0">
+                        <h1>page3</h1>
+                    </div>
+                
+                </div>
+                
+                <div style="position: fixed; bottom: 0; left: 50%; padding: 10px 50px; background-color: #ccc;" id="curpage">Go to console Or Press the F12 key for current page scroll</div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    
+
+
+</div>
+<script>
+
+$(document).ready(function() {
+
+ $("#owl-demo").owlCarousel({
+
+     navigation : true, // Show next and prev buttons
+
+     slideSpeed : 300,
+     paginationSpeed : 400,
+
+     items : 1, 
+     itemsDesktop : false,
+     itemsDesktopSmall : false,
+     itemsTablet: false,
+     itemsMobile : false
+
+ });
+$("#addCarous").click(function(e){
+debugger;
+var number = document.getElementsByClassName("item").length +1;
+    e.preventDefault(); //-- prevent form submit
+    $('#owl-demo').trigger('add.owl.carousel',['<div class="item"><img src="http://placehold.it/140x100" alt=""></div>'])
+        .trigger('refresh.owl.carousel');
+});
+
+
+$("#removeItem").click(function(e){
+    var indexToRemove = 2;
+    $("#owl-demo").trigger('remove.owl.carousel', [indexToRemove]).trigger('refresh.owl.carousel');
+});
+
+
+
+// Page content item
+let observer = new IntersectionObserver(function(entries) {
+    var ele = entries.filter(entry => entry.isIntersecting);
+    if (ele.length > 0) {
+        ele = ele[0].target;
+        console.log('Visible element is now: ' + ele.id);
+    }
+});
+
+document.querySelectorAll('.mycont [id^=page]').forEach(ele => observer.observe(ele));
+
+
+});
+
+
+
+</script>
+</body>
+</html>
